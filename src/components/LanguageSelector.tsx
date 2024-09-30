@@ -5,12 +5,12 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import {
     AvailableLanguages,
-    LanguageSources,
+    Language,
     languageToLabel,
 } from '../utils/Translation'
 
 export type Entry = {
-    value: keyof typeof LanguageSources
+    value: Language
     name: string
 }
 

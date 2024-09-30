@@ -1,7 +1,8 @@
 import FormControl from '@mui/material/FormControl'
 import Box from '@mui/material/Box'
-import { debounce, TextField } from '@mui/material'
+import { debounce, IconButton, TextField } from '@mui/material'
 import { useMemo, useState } from 'react'
+import { Close } from '@mui/icons-material'
 
 type Props = {
     text: string
@@ -23,6 +24,21 @@ export const UserTextInput = ({ text, setText }: Props) => {
                     onChange={(event) => {
                         setInternalText(event.target.value)
                         debouncedSetText(event.target.value)
+                    }}
+                    slotProps={{
+                        input: {
+                            endAdornment: (
+                                <IconButton
+                                    disabled={!internalText}
+                                    onClick={() => {
+                                        setText('')
+                                        setInternalText('')
+                                    }}
+                                >
+                                    <Close />
+                                </IconButton>
+                            ),
+                        },
                     }}
                 />
             </FormControl>

@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Entry, LanguageSelector } from './LanguageSelector'
-import { languageToLabel, TranslationEntry } from '../utils/Translation'
+import {
+    AvailableLanguages,
+    languageToLabel,
+    TranslationEntry,
+} from '../utils/Translation'
 import { loadTranslations } from '../utils/TranslationLoader'
 import { TranslationList } from './TranslationList'
 import { UserTextInput } from './UserTextInput'
@@ -16,13 +20,15 @@ export const HomePage = () => {
     const [text, setText] = useState<string>('')
     const [data, setData] = useState<TranslationEntry[]>([])
     const [selected, setSelected] = useState<Entry>({
-        value: 'draconic',
-        name: languageToLabel('draconic'),
+        value: AvailableLanguages[0],
+        name: languageToLabel(AvailableLanguages[0]),
     })
     const [preferred, setPreferred] = useState<PreferredEntry[]>([])
 
     useEffect(() => {
-        setData(loadTranslations(selected.value))
+        loadTranslations(selected.value).then((translations) => {
+            setData(translations)
+        })
     }, [selected])
 
     return (
