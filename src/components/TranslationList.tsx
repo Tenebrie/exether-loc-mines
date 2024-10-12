@@ -5,6 +5,7 @@ import { ListItem, ListItemButton, ListItemText } from '@mui/material'
 import Fuse from 'fuse.js'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { PreferredEntry } from './HomePage'
+import { makeFuse } from '../utils/Fuse'
 
 function renderRow(props: ListChildComponentProps<RowProps[]>) {
     const { index, style } = props
@@ -14,7 +15,7 @@ function renderRow(props: ListChildComponentProps<RowProps[]>) {
         <ListItem style={style} key={index} component="div" disablePadding>
             <ListItemButton selected={data?.selected}>
                 <ListItemText
-                    primary={`${data?.conlang} ${data?.pronounciation}`}
+                    primary={`${data?.conlang} ${data?.pronounciation} (${data?.weight})`}
                     secondary={`${data?.english}`}
                     onClick={data?.onClick}
                 />
@@ -37,16 +38,18 @@ type RowProps = TranslationEntry & {
 }
 
 export const TranslationList = ({ list, inputText, preferredList, addPreferred, removePreferred }: Props) => {
-    const fuse = useRef<Fuse<TranslationEntry>>(
-        new Fuse(list, {
-            keys: ['english'],
-        })
-    )
+    const fuse = useRef<Fuse<TranslationEntry>>(makeFuse(list))
 
     const generateList = useCallback((): RowProps[] => {
         const words = inputText.split(' ')
         const lastWord = words[words.length - 1]
-        const baseList = inputText.length > 2 ? fuse.current.search(lastWord).map((item) => item.item) : list
+        const baseList =
+            inputText.length > 2
+                ? fuse.current.search(lastWord).map((item) => ({
+                      ...item.item,
+                      weight: item.score,
+                  }))
+                : list
 
         const applicablePreferredList = preferredList
             .filter((item) => item.sourceText === lastWord)
@@ -78,9 +81,7 @@ export const TranslationList = ({ list, inputText, preferredList, addPreferred, 
     const [renderedList, setRenderedList] = useState(generateList())
 
     useEffect(() => {
-        fuse.current = new Fuse(list, {
-            keys: ['english'],
-        })
+        fuse.current = makeFuse(list)
     }, [list])
 
     useEffect(() => {

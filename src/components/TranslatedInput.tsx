@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from 'react'
 import Fuse from 'fuse.js'
 import ContentCopy from '@mui/icons-material/ContentCopy'
 import { PreferredEntry } from './HomePage'
+import { makeFuse } from '../utils/Fuse'
 
 type Props = {
     list: TranslationEntry[]
@@ -16,18 +17,10 @@ type Props = {
 export const TranslatedInput = ({ list, inputText, preferredList }: Props) => {
     const [text, setText] = useState<string>('')
 
-    const [fuse, setFuse] = useState<Fuse<TranslationEntry>>(
-        new Fuse(list, {
-            keys: ['english'],
-        })
-    )
+    const [fuse, setFuse] = useState<Fuse<TranslationEntry>>(makeFuse(list))
 
     useEffect(() => {
-        setFuse(
-            new Fuse(list, {
-                keys: ['english'],
-            })
-        )
+        setFuse(makeFuse(list))
     }, [list])
 
     const translate = useCallback(
