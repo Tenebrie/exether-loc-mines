@@ -4,7 +4,6 @@ export type TranslationEntry = {
     conlang: string
     english: string
     pronounciation: string
-    weight?: number
 }
 
 export const AvailableLanguages = [

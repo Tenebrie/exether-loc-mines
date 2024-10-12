@@ -15,7 +15,7 @@ function renderRow(props: ListChildComponentProps<RowProps[]>) {
         <ListItem style={style} key={index} component="div" disablePadding>
             <ListItemButton selected={data?.selected}>
                 <ListItemText
-                    primary={`${data?.conlang} ${data?.pronounciation} (${data?.weight})`}
+                    primary={`${data?.conlang} ${data?.pronounciation}`}
                     secondary={`${data?.english}`}
                     onClick={data?.onClick}
                 />
