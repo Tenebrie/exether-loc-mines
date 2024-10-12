@@ -8,6 +8,7 @@ export type TranslationEntry = {
 
 export const AvailableLanguages = [
     'anwarthi',
+    'avian',
     'darkelf',
     'draconic',
     'dwarf',
@@ -20,6 +21,7 @@ export const AvailableLanguages = [
     'naga',
     'namkhazen',
     'ocelian',
+    'ogre',
     'orcish',
     'praksian',
     'saltwaste',
@@ -31,6 +33,7 @@ export const AvailableLanguages = [
 
 const languageToLabelMap: Record<Language, string> = {
     anwarthi: 'Anwarthi/Luoydan',
+    avian: 'Avian/Ploran',
     darkelf: 'Dark-Elf/Luian',
     draconic: 'Draconic/Strachi',
     dwarf: 'Dwarf/Dôrbian',
@@ -43,6 +46,7 @@ const languageToLabelMap: Record<Language, string> = {
     naga: 'Naga/Tilsozian',
     namkhazen: 'Namkhazen/Saukian',
     ocelian: 'Ocelian',
+    ogre: 'Ogre/Iknyak',
     orcish: 'Orcish/Dvunokhi',
     praksian: 'Praksian/Khussite',
     saltwaste: 'Salt Waste Creole/Lutati',

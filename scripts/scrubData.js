@@ -47,10 +47,7 @@ function collectData() {
         const doCollect = () => {
             container.scrollBy(0, container.clientHeight)
             collectVisibleData()
-            if (
-                container.scrollTop + container.clientHeight <
-                container.scrollHeight
-            ) {
+            if (container.scrollTop + container.clientHeight < container.scrollHeight) {
                 setTimeout(doCollect, 50)
             } else {
                 resolve()
