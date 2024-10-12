@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Entry, LanguageSelector } from './LanguageSelector'
-import {
-    AvailableLanguages,
-    languageToLabel,
-    TranslationEntry,
-} from '../utils/Translation'
+import { AvailableLanguages, languageToLabel, TranslationEntry } from '../utils/Translation'
 import { loadTranslations } from '../utils/TranslationLoader'
 import { TranslationList } from './TranslationList'
 import { UserTextInput } from './UserTextInput'
@@ -35,26 +31,18 @@ export const HomePage = () => {
         <Box gap={4} display="flex" flexDirection="column">
             <LanguageSelector selected={selected} setSelected={setSelected} />
             <UserTextInput text={text} setText={setText} />
-            <TranslatedInput
-                list={data}
-                inputText={text}
-                preferredList={preferred}
-            />
+            <TranslatedInput list={data} inputText={text} preferredList={preferred} />
             <TranslationList
                 list={data}
                 inputText={text}
                 preferredList={preferred}
                 addPreferred={(val, source) =>
                     setPreferred([
-                        ...preferred.filter(
-                            (item) => item.sourceText !== source
-                        ),
+                        ...preferred.filter((item) => item.sourceText !== source),
                         { entry: val, sourceText: source },
                     ])
                 }
-                removePreferred={(val) =>
-                    setPreferred(preferred.filter((item) => item.entry !== val))
-                }
+                removePreferred={(val) => setPreferred(preferred.filter((item) => item.entry !== val))}
             />
         </Box>
     )

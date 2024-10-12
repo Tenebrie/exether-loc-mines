@@ -37,15 +37,9 @@ export const TranslatedInput = ({ list, inputText, preferredList }: Props) => {
                 .filter((item) => item.sourceText === word)
                 .map((item) => item.entry)
             results.sort((a, b) => {
-                if (
-                    applicablePreferredList.includes(a) &&
-                    !applicablePreferredList.includes(b)
-                ) {
+                if (applicablePreferredList.includes(a) && !applicablePreferredList.includes(b)) {
                     return -1
-                } else if (
-                    !applicablePreferredList.includes(a) &&
-                    applicablePreferredList.includes(b)
-                ) {
+                } else if (!applicablePreferredList.includes(a) && applicablePreferredList.includes(b)) {
                     return 1
                 } else {
                     return 0
@@ -76,11 +70,7 @@ export const TranslatedInput = ({ list, inputText, preferredList }: Props) => {
                     slotProps={{
                         input: {
                             endAdornment: (
-                                <IconButton
-                                    onClick={() =>
-                                        navigator.clipboard.writeText(text)
-                                    }
-                                >
+                                <IconButton onClick={() => navigator.clipboard.writeText(text)}>
                                     <ContentCopy />
                                 </IconButton>
                             ),

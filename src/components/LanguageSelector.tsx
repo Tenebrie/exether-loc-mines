@@ -3,11 +3,7 @@ import FormControl from '@mui/material/FormControl'
 import Box from '@mui/material/Box'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
-import {
-    AvailableLanguages,
-    Language,
-    languageToLabel,
-} from '../utils/Translation'
+import { AvailableLanguages, Language, languageToLabel } from '../utils/Translation'
 
 export type Entry = {
     value: Language
